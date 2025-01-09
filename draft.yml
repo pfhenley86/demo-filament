@@ -1,0 +1,28 @@
+models:
+  Product:
+    name: string
+    description: text
+    price: integer
+    tags: json nullable
+    image: string nullable
+    relationships:
+      belongsTo: Category
+      belongsToMany: Feature
+      hasMany: Review
+  Category:
+    name: string
+    description: text
+    relationships:
+      hasMany: Product
+  Feature:
+    name: string
+    description: text
+    relationships:
+      belongsToMany: Product
+  Review:
+    title: string
+    content: text
+    rating: integer
+    approved: boolean default:false
+    relationships:
+      belongsTo: Product
