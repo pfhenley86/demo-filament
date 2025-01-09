@@ -23,6 +23,11 @@ class Review extends Model
         'product_id',
     ];
 
+    public function approve()
+    {
+        $this->update(['approved' => true]);
+    }
+
     /**
      * The attributes that should be cast to native types.
      *

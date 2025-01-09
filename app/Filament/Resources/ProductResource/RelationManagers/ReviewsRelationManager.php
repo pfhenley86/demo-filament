@@ -9,6 +9,8 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Database\Eloquent\Collection;
+use Filament\Tables\Actions\BulkAction;
 
 class ReviewsRelationManager extends RelationManager
 {
@@ -54,6 +56,10 @@ class ReviewsRelationManager extends RelationManager
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
+                    BulkAction::make('approve')
+                    ->icon('heroicon-m-check')
+                    ->requiresConfirmation()
+                    ->action(fn (Collection $records) => $records->each->approve()),
                 ]),
             ]);
     }
